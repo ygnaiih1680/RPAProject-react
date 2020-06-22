@@ -1,8 +1,12 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import './index.css';
+import './scss/style.scss';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
+
+import {icons} from "./assets/icons";
+
+React.icons = icons
 
 ReactDOM.render(
   <React.StrictMode>
