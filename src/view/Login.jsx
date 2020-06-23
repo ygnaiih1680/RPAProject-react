@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useState} from 'react'
 import {Link} from 'react-router-dom'
 import {
     CButton,
@@ -20,14 +20,23 @@ import axios from 'axios'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
 
-const Login = () => {
-    const userAuthenticate = () => {
+const Login = ({history}) => {
+    const [success, setSuccess] = useState('로그인')
+
+    const userAuthenticate = (e) => {
+        e.preventDefault()
         const id = document.getElementById('uid').value
         const pw = document.getElementById('upw').value
         const data = new FormData()
         data.append('id', id)
         data.append('pw', pw)
-        axios.post('/user/authenticate', data).then(r=>console.log(r.data))
+        axios.post('/user/login', data).then(r=> {
+            if (r.data) {
+                history.push('/home')
+            }else {
+                setSuccess('존재하지 않는 사용자거나 비밀번호가 틀렸습니다.')
+            }
+        })
     }
 
     return (
@@ -38,7 +47,7 @@ const Login = () => {
                         <CCardGroup>
                             <CCard className="p-4">
                                 <CCardBody>
-                                    <CForm onSubmit={userAuthenticate}>
+                                    <CForm onSubmit={(e) => userAuthenticate(e)}>
                                         <h1>로그인</h1>
                                         <p className="text-muted">로그인 하세요.</p>
                                         <CInputGroup className="mb-3">
@@ -47,7 +56,7 @@ const Login = () => {
                                                     <CIcon name="cil-user"/>
                                                 </CInputGroupText>
                                             </CInputGroupPrepend>
-                                            <CInput id='uid' type="text" placeholder="아이디" autoComplete="username"/>
+                                            <CInput id='uid' type="text" placeholder="이메일" autoComplete="username"/>
                                         </CInputGroup>
                                         <CInputGroup className="mb-4">
                                             <CInputGroupPrepend>
@@ -60,10 +69,7 @@ const Login = () => {
                                         </CInputGroup>
                                         <CRow>
                                             <CCol xs="6">
-                                                <CButton type='submit' color="primary" className="px-4">로그인</CButton>
-                                            </CCol>
-                                            <CCol xs="6" className="text-right">
-                                                <CButton color="link" className="px-0 font-xs">비밀번호를 잊으셨나요?</CButton>
+                                                <CButton type='submit' color="primary" className="px-4">{success}</CButton>
                                             </CCol>
                                         </CRow>
                                     </CForm>
