@@ -52,6 +52,10 @@ const SignUp = props => {
         data.append('phone', phone)
         setLoad(true)
         axios.post('register/new', data).then(r => completeRegister(r.data))
+            .catch(()=> {
+                setLoad(false)
+                setSuccess('에러가 발생했습니다.')
+            })
     }
 
     return (
@@ -107,7 +111,7 @@ const SignUp = props => {
                                         <CInput id='userPhone' type="tel" placeholder="전화번호" autoComplete="tel" required
                                                 pattern='010-[0-9]{4}-[0-9]{4}'/>
                                     </CInputGroup>
-                                    <CButton type='submit' color="success" block>{load ? <Loading /> : null}{success}</CButton>
+                                    <CButton type='submit' color="success" block><div>{load ? <Loading /> : null}{success}</div></CButton>
                                 </CForm>
                             </CCardBody>
                         </CCard>

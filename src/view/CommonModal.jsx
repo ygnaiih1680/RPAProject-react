@@ -5,8 +5,8 @@ import {controlModal} from "../store";
 
 const CommonModal = props => {
     const {
-        modal: {open, content, header},
-        close
+        close,
+        modal: {open, content, header, confirmAction = close}
     } = props
     return(
         <CModal show={open} onClose={close}>
@@ -15,7 +15,7 @@ const CommonModal = props => {
                 {content}
             </CModalBody>
             <CModalFooter>
-                <CButton color="primary">확인</CButton>
+                <CButton color="primary" onClick={confirmAction}>확인</CButton>
                 <CButton color="secondary" onClick={close}>취소</CButton>
             </CModalFooter>
         </CModal>
@@ -34,4 +34,5 @@ const mapDispatchToProps = (dispatch) => {
         close: () => dispatch(controlModal({open: false}))
     }
 }
+
 export default connect(mapStateToProps, mapDispatchToProps)(CommonModal)

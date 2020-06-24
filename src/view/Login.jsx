@@ -16,11 +16,13 @@ import {
 } from '@coreui/react'
 import CIcon from '@coreui/icons-react'
 import axios from 'axios'
+import {login} from "../store";
+import {connect} from 'react-redux'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
 
-const Login = ({history}) => {
+const Login = ({history, loginSuccess}) => {
     const [success, setSuccess] = useState('로그인')
 
     const userAuthenticate = (e) => {
@@ -31,10 +33,11 @@ const Login = ({history}) => {
         data.append('id', id)
         data.append('pw', pw)
         axios.post('/user/login', data).then(r=> {
-            if (r.data) {
+            if (r.data.id) {
+                loginSuccess(r.data)
                 history.push('/home')
             }else {
-                setSuccess('존재하지 않는 사용자거나 비밀번호가 틀렸습니다.')
+                setSuccess(r.data.error)
             }
         })
     }
@@ -96,4 +99,10 @@ const Login = ({history}) => {
     )
 }
 
-export default Login
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loginSuccess: (user) => dispatch(login(user))
+    }
+}
+
+export default connect(null, mapDispatchToProps)(Login)

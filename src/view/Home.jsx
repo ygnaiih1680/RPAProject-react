@@ -1,20 +1,38 @@
 import React from 'react'
-import {CCardBody, CCard, CContainer, CCardTitle, CCardHeader, CButton} from "@coreui/react";
-import {controlModal} from "../store";
-import {connect} from 'react-redux'
-import CommonModal from "./CommonModal";
+import {CButton, CCard, CCardBody, CCardFooter, CCardHeader, CCardTitle, CContainer, CFade} from "@coreui/react";
+import {Link, Redirect} from "react-router-dom";
+import {logout} from "../store";
+import {connect, useStore} from 'react-redux'
 
-const Home = props => {
-    return(
+const Home = ({logoutDispatch}) => {
+    const {user} = useStore().getState()
+    if (user) if (user.auth === 'ADMIN') return <Redirect to='/admin'/>
+    return (
         <div className="c-app c-default-layout flex-row align-items-center">
             <CContainer>
-                <CCard>
-                    <CCardHeader><CCardTitle className='my-auto'>aaa</CCardTitle></CCardHeader>
-                    <CCardBody>
-                        <CButton onClick={() => props.open({open: true, content: '내용', header: '제목'})}>테스트</CButton>
-                        <CommonModal/>
-                    </CCardBody>
-                </CCard>
+                <CFade>
+                    <CCard>
+                        <CCardHeader><CCardTitle className='my-auto'>(주) 퐁신</CCardTitle></CCardHeader>
+                        <CCardBody>
+                            {user ? user.name ? <div>반갑습니다. {user.name}님<br/><br/></div> : null : null}
+                            IT인력 채용 시작<br/>
+                            모집 기간 : 2020.06.01-2020.06.24
+                        </CCardBody>
+                        <CCardFooter className='d-flex justify-content-between'>
+                            <Link to='/login'>
+                                {
+                                    user ?
+                                        <CButton color='primary' onClick={logoutDispatch}>로그아웃</CButton> :
+                                        <CButton color='primary'>로그인</CButton>
+                                }
+                            </Link>
+                            <Link to='/apply'>
+                                <CButton color='primary'>지원하기</CButton>
+                            </Link>
+                        </CCardFooter>
+                    </CCard>
+                </CFade>
+
             </CContainer>
         </div>
     )
@@ -22,8 +40,8 @@ const Home = props => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        open: (modal) => {
-            dispatch(controlModal(modal))
+        logoutDispatch: () => {
+            dispatch(logout())
         }
     }
 }
