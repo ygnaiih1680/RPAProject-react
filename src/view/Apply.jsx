@@ -16,6 +16,7 @@ import {
 import {connect, useStore} from 'react-redux'
 import {controlModal} from "../store";
 import axios from "axios";
+import {Redirect} from 'react-router-dom'
 
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
@@ -24,8 +25,11 @@ const GITHUB_PATTERN = 'https://github.com/'
 
 const Apply = props => {
     const {confirm, history} = props
-    const {user, user: {id}} = useStore().getState()
-    if (!user) history.push('/login')
+    const {user} = useStore().getState()
+    if (!user) {
+        return <Redirect to='/home'/>
+    }
+    const {id} = user
     const homeRedirect = () => {
         history.push('/home')
         confirm({open: false})

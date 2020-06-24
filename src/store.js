@@ -47,8 +47,18 @@ const {actions, reducer} = createSlice({
                     }
                 }
             }
+        },
+        controlDetailModal: (state, action) => {
+            const {payload} = action
+            return {
+                ...state,
+                detailModal: {
+                    ...payload
+                }
+
+            }
         }
     }
 });
-export const {controlModal, login, logout, loadAllApply, loadApplyDetail} = actions
+export const {controlModal, login, logout, loadAllApply, loadApplyDetail, controlDetailModal} = actions
 export default configureStore({reducer});

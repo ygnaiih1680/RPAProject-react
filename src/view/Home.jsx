@@ -6,6 +6,7 @@ import {connect, useStore} from 'react-redux'
 
 const Home = ({logoutDispatch}) => {
     const {user} = useStore().getState()
+    console.log(user)
     if (user) if (user.auth === 'ADMIN') return <Redirect to='/admin'/>
     return (
         <div className="c-app c-default-layout flex-row align-items-center">
