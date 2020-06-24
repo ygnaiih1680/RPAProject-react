@@ -7,11 +7,11 @@ import {
     CCardHeader,
     CCardTitle,
     CContainer,
+    CFade,
     CForm,
     CInput,
     CLabel,
-    CTextarea,
-    CFade
+    CTextarea
 } from "@coreui/react";
 import {connect, useStore} from 'react-redux'
 import {controlModal} from "../store";
@@ -23,6 +23,7 @@ axios.defaults.baseURL = 'http://localhost:8080'
 
 const GITHUB_PATTERN = 'https://github.com/'
 
+//지원 페이지
 const Apply = props => {
     const {confirm, history} = props
     const {user} = useStore().getState()

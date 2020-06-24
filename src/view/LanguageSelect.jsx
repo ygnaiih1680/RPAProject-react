@@ -69,6 +69,7 @@ const LANGUAGE_LIST = [
     'Visual Basic',
 ]
 
+//언어 선택 모달
 const LanguageSelect = props => {
     const {
         close,

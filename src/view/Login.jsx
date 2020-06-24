@@ -22,6 +22,7 @@ import {connect} from 'react-redux'
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
 
+//로그인 페이지
 const Login = ({history, loginSuccess}) => {
     const [success, setSuccess] = useState('로그인')
 

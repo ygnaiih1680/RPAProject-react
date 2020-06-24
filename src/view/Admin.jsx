@@ -19,6 +19,7 @@ import LanguageSelect from "./LanguageSelect";
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
 
+//관리자 페이지
 const Admin = props => {
     const {history, user, loadList, list, control, alert} = props
     if (!user) history.push('/404')

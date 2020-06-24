@@ -16,9 +16,11 @@ import {Loading} from "./Loading";
 import {CIcon} from "@coreui/icons-react";
 import axios from "axios";
 
-axios.defaults.withCredentials = true
-axios.defaults.baseURL = 'http://localhost:8080'
+//axios기본설정
+axios.defaults.withCredentials = true//CORS 허용
+axios.defaults.baseURL = 'http://localhost:8080'//tomcat port로 접속
 
+//회원가입 페이지
 const SignUp = props => {
     const [validationTarget, setValidationTarget] = useState('')
     const [load, setLoad] = useState(false)

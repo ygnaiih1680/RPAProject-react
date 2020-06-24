@@ -1,17 +1,7 @@
 import React from 'react'
-import {
-  CButton,
-  CCol,
-  CContainer,
-  CInput,
-  CInputGroup,
-  CInputGroupPrepend,
-  CInputGroupAppend,
-  CInputGroupText,
-  CRow
-} from '@coreui/react'
-import CIcon from '@coreui/icons-react'
+import {CCol, CContainer, CRow} from '@coreui/react'
 
+//예외 페이지
 const Page404 = () => {
   return (
     <div className="c-app c-default-layout flex-row align-items-center">

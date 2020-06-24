@@ -15,9 +15,10 @@ import {
 } from "@coreui/react";
 import axios from "axios";
 import {Loading} from "./Loading";
-
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
+
+//지원자 상세조회 모달
 const ApplierDetail = props => {
     const {id, detail, loadDetail, name, show = false, control} = props
     const applyDetail = detail[id]
@@ -28,7 +29,6 @@ const ApplierDetail = props => {
     const close = () => {
         control({id, detail, name, show: false})
     }
-    console.log(show)
     return (
         <CModal show={show} onClose={close}>
             <CModalHeader><CModalTitle className="my-auto">{name}</CModalTitle></CModalHeader>

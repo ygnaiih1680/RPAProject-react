@@ -3,6 +3,7 @@ import {connect} from 'react-redux'
 import {CModal, CModalBody, CModalHeader, CModalTitle, CModalFooter, CButton} from "@coreui/react";
 import {controlModal} from "../store";
 
+//일반 모달
 const CommonModal = props => {
     const {
         close,

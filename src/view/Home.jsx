@@ -4,6 +4,7 @@ import {Link, Redirect} from "react-router-dom";
 import {logout} from "../store";
 import {connect, useStore} from 'react-redux'
 
+//메인 페이지
 const Home = ({logoutDispatch}) => {
     const {user} = useStore().getState()
     console.log(user)

@@ -18,6 +18,7 @@ import {Loading} from "./Loading";
 axios.defaults.withCredentials = true
 axios.defaults.baseURL = 'http://localhost:8080'
 
+//이메일 인증 페이지
 const EmailAuthentication = ({location}) => {
     const query = qs.parse(location.search, {ignoreQueryPrefix: true})
     const [load, setLoad] = useState(false)
